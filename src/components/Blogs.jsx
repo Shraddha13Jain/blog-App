@@ -3,7 +3,6 @@ import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 
 function Blogs (){
@@ -32,11 +31,15 @@ function Blogs (){
     <>
 
         <Container>
-            <Row lg="12">
+            <Row style={{ marginTop: '1.0rem' }}>
          {(blogs) ? (
              <>
                 {blogs.map( (blog) => (
-                        <Card className ="" style={{ width: '18rem' }}>
+                        <Card className ="" style={{ width: '20rem' ,marginLeft: '2.0rem',marginTop: '2.0rem', borderRadius:'2.0rem'}}
+                        border={'dark'}
+                       
+                        text={'Success'.toLowerCase() === 'light' ? 'dark' : 'white'}
+                        bg={'Warning'.toLowerCase()}>
                         <Card.Body>
                            <Card.Title>{blog.title}</Card.Title>
                            <Card.Subtitle className="mb-2 text-muted">{blog.author}</Card.Subtitle>
