@@ -11,10 +11,10 @@ function Home () {
     <>
         <Container>
             <Row>
-                <Col lg="8">
+                <Col md="6" lg="8">
                            <Blogs />
                 </Col>
-                <Col lg="4"> 
+                <Col md="6" lg="4"> 
                  <CreateBlog />
                 </Col>
             </Row>
