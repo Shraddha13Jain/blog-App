@@ -5,7 +5,7 @@ import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 
-function Blogs (){
+function Blogs(props){
     
     const [blogs , setBlogs] = useState([]);
 
@@ -15,7 +15,7 @@ function Blogs (){
            const res = await axios.get("https://blogapp1302.herokuapp.com/api/blogs");
            console.log(res.data);
            if(res.data){
-               setBlogs(res.data);
+            setBlogs(res.data.slice(0, props.count));
            }
           }
           catch(error){
@@ -44,7 +44,7 @@ function Blogs (){
                            <Card.Title>{blog.title}</Card.Title>
                            <Card.Subtitle className="mb-2 text-muted">{blog.author}</Card.Subtitle>
                            <Card.Text>
-                              {blog.desc}
+                              {blog.desc.substring(0,500)}
                            </Card.Text>
                         </Card.Body>  
                     </Card>
