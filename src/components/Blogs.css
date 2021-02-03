@@ -1,0 +1,11 @@
+.blog-card{
+    margin:5px;
+    border-style: outset;
+  }
+  .blog-body{
+    background-color: lightblue;
+  }
+  
+  .header{
+    margin-left: 20px;
+  }

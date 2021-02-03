@@ -1,20 +1,45 @@
-import React, {useEffect, useState} from 'react';
-
-import Form from 'react-bootstrap/Form';
-import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import { Jumbotron } from 'react-bootstrap';
+import React, {useState, useEffect} from "react";
+import {Redirect } from "react-router-dom";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 import axios from "axios";
-import './CreateBlog.css';
+import Modal from "react-bootstrap/Modal";
+import './CreateBlog.css'
 
 import config from "../config.json";
-function CreateBlog(){
+function CreateBlog(props){
+    let id = props.match.params.id;
     const [blogPost, setBlog] = useState({
         title: '',
         author: '',
         desc: ''
     });
+    const [updated, setUpdated] = useState(false);
+
+    useEffect(() => {
+        const fetchBlog = async() => {
+            try{
+                
+                const res = await axios.get(`${config.BASE}blog/${id}`);
+                console.log(res.data);
+                if(res.data){
+                    let blog = res.data;
+                    setBlog({
+                        title: blog.title,
+                        author: blog.author,
+                        desc: blog.desc
+                    });
+                }
+            }
+            catch(error){
+                console.log(error);
+            }
+            
+        } 
+        fetchBlog();
+
+    }, []);
+
 
     const handleChange = (e) => {
         setBlog({
@@ -25,20 +50,18 @@ function CreateBlog(){
 
     const postBlog =async() => {
         try{
-            const res= await axios.post( `${config.BASE}create` , blogPost  );
+            const res= await axios.put( `${config.BASE}update/${id}` , blogPost  );
             if(res.data){
-                 setBlog({
-                      title :'',
-                      author:'',
-                      desc:''
-                 })
-                 window.alert("blog created");
-                 window.location.reload(false);
+                setUpdated(true);
+                window.alert("blog Updated");
+                // window.location.reload(false);
             }
         }catch(err){
             console.log(err);
         }
-       // dataFetch();
+    }
+    if(updated){
+        return <Redirect to={"/fullblog/"+id} />;
     }
 
     const onSubmit =(e) => {
@@ -49,13 +72,11 @@ function CreateBlog(){
         }
     }
 
-    console.log(blogPost);
 
-  
-  return(
-   <>
-  
-  <Modal.Dialog className="dialog">
+     return(
+        <>
+        
+        <Modal.Dialog className="dialog">
             <Modal.Header>
                 <Modal.Title>Create a Blog</Modal.Title>
             </Modal.Header>
@@ -75,12 +96,11 @@ function CreateBlog(){
             </Form.Group>
             
             <Modal.Footer>
-            <Button variant="primary" onClick={onSubmit}>Create a Blog</Button>
+            <Button variant="primary" onClick={onSubmit}>Update a Blog</Button>
             </Modal.Footer>
         </Form>
         </Modal.Dialog> 
-   </>
-  );
-
+        </>
+    )
 }
 export default CreateBlog;
