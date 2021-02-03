@@ -3,6 +3,7 @@ import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
+import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 
 function Blogs(props){
@@ -43,9 +44,11 @@ function Blogs(props){
                         <Card.Body>
                            <Card.Title>{blog.title}</Card.Title>
                            <Card.Subtitle className="mb-2 text-muted">{blog.author}</Card.Subtitle>
+                          
                            <Card.Text>
                               {blog.desc.substring(0,500)}
                            </Card.Text>
+                           <Button variant="danger">Explore More</Button>
                         </Card.Body>  
                     </Card>
                 ))
