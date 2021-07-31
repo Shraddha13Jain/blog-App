@@ -15,22 +15,14 @@ class Header extends Component{
   render(){
       return(
   <Navbar bg="dark" variant="dark" collapseOnSelect="true" expand="lg" sticky="top">  
-  <Navbar.Brand href="/">BLOG APP</Navbar.Brand>
+  <Navbar.Brand href="/">ROUTINE BLOGGER</Navbar.Brand>
   <Navbar.Toggle aria-controls="basic-navbar-nav" />
   <Navbar.Collapse id="basic-navbar-nav">
   <Nav className="mr-auto">
-    <Nav.Link ><Link to="/allblogs"> All Blogs </Link></Nav.Link>
-    <Nav.Link href="#Create">New Blog</Nav.Link>
+    
   </Nav>
-  <Form inline style={{marginRight:"10px"}}>
-    <NavDropdown title="Search filters" id="basic-nav-dropdown">
-      <NavDropdown.Item href="#action/3.1">Title</NavDropdown.Item>
-      <NavDropdown.Item href="#action/3.2">Author</NavDropdown.Item>
-      <NavDropdown.Item href="#action/3.3">Content</NavDropdown.Item>
-    </NavDropdown>
-    <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-    <Button variant="outline-info">Search</Button>
-  </Form>
+  <Nav.Link href="/allblogs" style={{color:'whitesmoke'}}>ALL BLOGS</Nav.Link> 
+  <Nav.Link href="/newblog" style={{color:'whitesmoke'}}>NEW BLOG</Nav.Link>
   </Navbar.Collapse> 
 </Navbar>
 

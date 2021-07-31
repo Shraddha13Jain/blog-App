@@ -10,7 +10,7 @@ import AllBlogs from "./components/AllBlogs";
 import CreateBlog from "./components/CreateBlog";
 import SingleBlog from "./components/SingleBlog";
 import UpdateBlog from "./components/UpdateBlog";
-
+import NewBlog from "./components/newBlog";
 
 
 function App() {
@@ -25,6 +25,7 @@ function App() {
           <Route path='/fullblog/:id' component={SingleBlog}/>
           <Route exact path="/" component={Home} />
           <Route  path="/allblogs" component={AllBlogs} />
+          <Route  path="/newblog" component={NewBlog} />
          
          </Switch>
       </BrowserRouter>

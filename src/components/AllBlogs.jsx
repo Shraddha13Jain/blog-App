@@ -4,7 +4,6 @@ import Blogs from "./Blogs";
 function AllBlog(){
     return (
         <>
-            All Blogs
             <Blogs count={10000}/>
         </>
     )

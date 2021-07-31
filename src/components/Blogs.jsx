@@ -52,7 +52,7 @@ function Blogs(props){
                                 </Card.Text>
                                 <Link to={{pathname:'/fullblog/'+blog._id}}><Button variant="primary" >Explore more</Button></Link>
                             </Card.Body>
-                            <Card.Footer className="text-muted">Last updated {dayjs(`${blog.updatedAt}`).fromNow()}</Card.Footer>
+                            <Card.Footer className="text-muted">Keep Everything updated</Card.Footer>
                         </Card>
                         
                         </Col>

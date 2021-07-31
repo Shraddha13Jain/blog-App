@@ -1,53 +1,25 @@
-import React, {useState, useEffect} from "react";
-import {Redirect } from "react-router-dom";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import axios from "axios";
-import Modal from "react-bootstrap/Modal";
-import './newBlog.css'
+import React, {useEffect, useState} from 'react';
+import {Link } from "react-router-dom";
 
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import Form from 'react-bootstrap/Form';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
+import axios from "axios";
+import './newBlog.css';
 import Image from "react-bootstrap/Image";
 
 import img from './kingdom-1434.cfa6d963.png';
 
-
 import config from "../config.json";
-function CreateBlog(props){
-    let id = props.match.params.id;
+function NewBlog(){
     const [blogPost, setBlog] = useState({
         title: '',
         author: '',
         desc: ''
     });
-    const [updated, setUpdated] = useState(false);
-
-    useEffect(() => {
-        const fetchBlog = async() => {
-            try{
-                
-                const res = await axios.get(`${config.BASE}blog/${id}`);
-                console.log(res.data);
-                if(res.data){
-                    let blog = res.data;
-                    setBlog({
-                        title: blog.title,
-                        author: blog.author,
-                        desc: blog.desc
-                    });
-                }
-            }
-            catch(error){
-                console.log(error);
-            }
-            
-        } 
-        fetchBlog();
-
-    }, []);
-
 
     const handleChange = (e) => {
         setBlog({
@@ -58,18 +30,20 @@ function CreateBlog(props){
 
     const postBlog =async() => {
         try{
-            const res= await axios.put( `${config.BASE}update/${id}` , blogPost  );
+            const res= await axios.post( `${config.BASE}create` , blogPost  );
             if(res.data){
-                setUpdated(true);
-                window.alert("blog Updated");
-                // window.location.reload(false);
+                 setBlog({
+                      title :'',
+                      author:'',
+                      desc:''
+                 })
+                 window.alert("blog created");
+                 window.location.reload(false);
             }
         }catch(err){
             console.log(err);
         }
-    }
-    if(updated){
-        return <Redirect to={"/fullblog/"+id} />;
+       // dataFetch();
     }
 
     const onSubmit =(e) => {
@@ -77,18 +51,20 @@ function CreateBlog(props){
             postBlog();
         }else{
             window.alert("Blog details are  empty");
+            
         }
     }
 
+    console.log(blogPost);
 
-     return(
-        <>
-        <Container>
+  
+  return(
+   <>
+   <Container>
        <Row>
            <Col md={6}> <Image src={img}  fluid/> </Col>
            <Col md={6}>
-        
-        <Modal.Dialog className="dialog">
+           <Modal.Dialog className="dialog" >
             <Modal.Header>
                 <Modal.Title>Create a Blog</Modal.Title>
             </Modal.Header>
@@ -108,14 +84,19 @@ function CreateBlog(props){
             </Form.Group>
             
             <Modal.Footer>
-            <Button variant="primary" onClick={onSubmit}>Update a Blog</Button>
+            <Button variant="primary" onClick={onSubmit}>Create a Blog</Button>
             </Modal.Footer>
         </Form>
-        </Modal.Dialog>
-        </Col> 
-        </Row>
-        </Container>
-        </>
-    )
+        </Modal.Dialog> 
+           
+           </Col>
+       </Row>
+
+   </Container>
+  
+  
+   </>
+  );
+
 }
-export default CreateBlog;
+export default NewBlog;
